@@ -1,10 +1,10 @@
 class Ak < Formula
   desc "ADB extensions kit - Essential ADB utilities for Android development"
   homepage "https://github.com/luminousvault/adb-extensions"
-  url "https://github.com/luminousvault/adb-extensions/releases/download/v1.1.5/adb-extensions-v1.1.5.tar.gz"
-  sha256 "cb68643b6a807e4d71d698421b4ed0992bea0776d8050d5a69da5fbddef1ed81"
+  url "https://github.com/luminousvault/adb-extensions/releases/download/v1.1.6/adb-extensions-v1.1.6.tar.gz"
+  sha256 "3612c1316e206812f1eae91108fe529797697cfa8ca42580d8aa1240e9fb7f48"
   license "MIT"
-  version "1.1.5"
+  version "1.1.6"
 
   # depends_on "android-platform-tools"  # adb 의존성
 
