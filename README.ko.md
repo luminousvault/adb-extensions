@@ -121,6 +121,7 @@ ak <command> [options] [arguments...]
 - **숫자키** (1-9) - 빠른 선택 (단일 항목, 9개 이하 APK)
 - **Enter** - 선택 확정
 - **Ctrl+C** - 취소
+- 여러 디렉터리에서 선택 시 각 항목 뒤에 출처 폴더명이 dim 색상으로 표시됨 (예: `(directory)`)
 
 #### 디바이스 선택
 
@@ -192,6 +193,11 @@ ak install -m app.apk
 **디렉토리에서 인터랙티브 선택:**
 ```bash
 ak install /path/to/dir
+```
+
+**여러 디렉터리에서 인터랙티브 선택:**
+```bash
+ak install /path/to/dir1 /path/to/dir2
 ```
 
 ### APK 추출

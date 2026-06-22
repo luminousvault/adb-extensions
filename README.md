@@ -121,6 +121,7 @@ ak <command> [options] [arguments...]
 - **Number keys** (1-9) - Quick select (single item, 9 or fewer APKs)
 - **Enter** - Confirm selection
 - **Ctrl+C** - Cancel
+- When selecting from multiple directories, each item shows its source folder name (e.g. `(directory)`) in dim color
 
 #### Device Selection
 
@@ -192,6 +193,11 @@ ak install -m app.apk
 **Interactive selection from directory:**
 ```bash
 ak install /path/to/dir
+```
+
+**Interactive selection from multiple directories:**
+```bash
+ak install /path/to/dir1 /path/to/dir2
 ```
 
 ### APK Extraction

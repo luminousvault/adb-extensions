@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.6] - 2026-06-22
+
+### Improved
+- `install` command APK selection UI now shows source folder label per item
+  - When APKs come from multiple directories, each item displays its source folder name (e.g. `(directory)`) in dim color after the filename
+  - Label is omitted when all APKs share the same source directory
+  - Direct APK file arguments use their parent directory as the source
+  - Filter mode (`/`) matches only against the APK filename, not the folder label
+
 ## [1.1.5] - 2026-02-05
 
 ### Added
