@@ -91,9 +91,11 @@ select_interactive() {
   declare -a highlighted_items=() # 하이라이트 적용된 항목 (사전 계산)
   
   # 소문자 변환 사전 계산 (성능 최적화: 1회만 변환)
+  # 탭 이후(폴더 레이블)는 제거하고 소문자 변환 — 필터링이 파일명으로만 매칭되도록
   declare -a items_lower=()
   for item in "${items[@]}"; do
-    items_lower+=("$(printf '%s' "$item" | tr '[:upper:]' '[:lower:]')")
+    local _item_name="${item%%$'\t'*}"
+    items_lower+=("$(printf '%s' "$_item_name" | tr '[:upper:]' '[:lower:]')")
   done
   
   # Sort 모드 관련 변수
@@ -479,14 +481,20 @@ select_interactive() {
     local number_prefix
     number_prefix=$(printf "%${max_digits}d. " "$number")
     local highlighted_item="${highlighted_items[$display_idx]}"
-    
+
+    local raw_item="${items[$items_idx]}"
+    local folder_suffix=""
+    if [[ "$raw_item" == *$'\t'* ]]; then
+      folder_suffix="${DIM}  ${raw_item#*$'\t'}${NC}"
+    fi
+
     if [ $display_idx -eq $focused ]; then
-      echo -e "\033[K${CYAN}➤ ${checkbox}${BOLD}${number_prefix}${highlighted_item}${NC}"
+      echo -e "\033[K${CYAN}➤ ${checkbox}${BOLD}${number_prefix}${highlighted_item}${NC}${folder_suffix}"
     else
       if [ "$mode" = "multi" ] && [ ${selection_status[$original_idx]} -eq 1 ]; then
-        echo -e "\033[K  ${GREEN}${checkbox}${NC}${number_prefix}${highlighted_item}"
+        echo -e "\033[K  ${GREEN}${checkbox}${NC}${number_prefix}${highlighted_item}${folder_suffix}"
       else
-        echo -e "\033[K  ${checkbox}${number_prefix}${highlighted_item}"
+        echo -e "\033[K  ${checkbox}${number_prefix}${highlighted_item}${folder_suffix}"
       fi
     fi
   }

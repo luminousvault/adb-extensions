@@ -258,6 +258,7 @@ validate_and_collect_apk_files() {
   local has_directories=false
   local has_apk_files=false
   local apk_list=()
+  local apk_sources=()
 
   # 전역 변수 초기화
   USER_SPECIFIED_DIRECTORIES=()
@@ -279,6 +280,10 @@ validate_and_collect_apk_files() {
         # APK 파일 발견
         has_apk_files=true
         apk_list+=("$arg")
+        local _src_dir
+        _src_dir=$(cd "$(dirname "$arg")" 2>/dev/null && pwd)
+        [[ "$_src_dir" == "$HOME"* ]] && _src_dir="${_src_dir/#$HOME/~}"
+        apk_sources+=("$_src_dir")
       else
         # APK가 아닌 파일 - 에러 메시지 표시 후 종료
         echo -e "${ERROR} Invalid file detected: '$arg'. Only APK files are allowed."
@@ -291,7 +296,13 @@ validate_and_collect_apk_files() {
       USER_SPECIFIED_DIRECTORIES+=("$arg")
 
       get_apk_list "$arg" "time-newest"
-      apk_list+=("${APK_LIST[@]}")
+      local _src_dir="$arg"
+      [[ "$_src_dir" != /* ]] && _src_dir=$(cd "$_src_dir" 2>/dev/null && pwd)
+      [[ "$_src_dir" == "$HOME"* ]] && _src_dir="${_src_dir/#$HOME/~}"
+      for _apk in "${APK_LIST[@]}"; do
+        apk_list+=("$_apk")
+        apk_sources+=("$_src_dir")
+      done
     fi
   done
 
@@ -313,21 +324,24 @@ validate_and_collect_apk_files() {
     # 여러 APK가 있으면 인터랙티브 선택
     # 필터링이 있으면 적용
     if [ -n "$filter" ]; then
-      filtered_apks=()
-      for apk in "${apk_list[@]}"; do
-        all_filters_match=true
+      local filtered_apks=()
+      local filtered_sources=()
+      for i in "${!apk_list[@]}"; do
+        local all_filters_match=true
         IFS=' ' read -ra filters <<< "$filter"
         for filter_item in "${filters[@]}"; do
-          if ! echo "$apk" | grep -i -q "$filter_item"; then
+          if ! echo "${apk_list[$i]}" | grep -i -q "$filter_item"; then
             all_filters_match=false
             break
           fi
         done
         if [ "$all_filters_match" = true ]; then
-          filtered_apks+=("$apk")
+          filtered_apks+=("${apk_list[$i]}")
+          filtered_sources+=("${apk_sources[$i]}")
         fi
       done
       apk_list=("${filtered_apks[@]}")
+      apk_sources=("${filtered_sources[@]}")
 
       if [ ${#apk_list[@]} -eq 0 ]; then
         echo -e "${ERROR} No APK files found matching all filters: ${filter}"
@@ -343,10 +357,30 @@ validate_and_collect_apk_files() {
     fi
 
     # select_interactive 멀티 모드 호출
-    # 표시용 basename 배열 생성
+    # 출처가 2개 이상인지 판단
+    local _multi_source=false
+    local _distinct=()
+    for _src in "${apk_sources[@]}"; do
+      local _dup=false
+      for _e in "${_distinct[@]}"; do
+        [[ "$_src" == "$_e" ]] && { _dup=true; break; }
+      done
+      [ "$_dup" = "false" ] && _distinct+=("$_src")
+    done
+    [ ${#_distinct[@]} -gt 1 ] && _multi_source=true
+
+    # 표시용 배열 생성 (출처 2개 이상이면 파일명\t(폴더명) 형식)
     local display_list=()
-    for apk in "${apk_list[@]}"; do
-      display_list+=("$(basename "$apk")")
+    for i in "${!apk_list[@]}"; do
+      local _base
+      _base=$(basename "${apk_list[$i]}")
+      if [ "$_multi_source" = "true" ]; then
+        local _label
+        _label=$(basename "${apk_sources[$i]}")
+        display_list+=("${_base}"$'\t'"(${_label})")
+      else
+        display_list+=("$_base")
+      fi
     done
     
     # 경로 정보 추출 - 사용자 지정 디렉토리 목록 사용

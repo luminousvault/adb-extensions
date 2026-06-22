@@ -133,7 +133,7 @@ apply_filter() {
     for ((i=0; i<item_count; i++)); do
       filtered_indices+=("$i")
       display_items+=("${items[$i]}")
-      highlighted_items+=("${items[$i]}")  # 원본 그대로
+      highlighted_items+=("${items[$i]%%$'\t'*}")  # 탭 이후(폴더 레이블) 제거
     done
     debug_log "apply_filter: no filter, returning all $item_count items"
     return
@@ -162,7 +162,8 @@ apply_filter() {
         if ! matches_sequential "$item_lower" "$filter_text_lower"; then
           filtered_indices+=("$i")
           display_items+=("${items[$i]}")
-          highlighted_items+=("$(compute_highlight "${items[$i]}" "${items_lower[$i]}" "$filter_text_lower")")
+          local _item_name="${items[$i]%%$'\t'*}"
+          highlighted_items+=("$(compute_highlight "$_item_name" "${items_lower[$i]}" "$filter_text_lower")")
           added_flags[$i]=1
         fi
       fi
@@ -178,7 +179,8 @@ apply_filter() {
         filtered_indices+=("$i")
         display_items+=("${items[$i]}")
         # 하이라이트 사전 계산 (서브셸 1회만)
-        highlighted_items+=("$(compute_highlight "${items[$i]}" "${items_lower[$i]}" "$filter_text_lower")")
+        local _item_name="${items[$i]%%$'\t'*}"
+        highlighted_items+=("$(compute_highlight "$_item_name" "${items_lower[$i]}" "$filter_text_lower")")
         added_flags[$i]=1
       fi
     fi
