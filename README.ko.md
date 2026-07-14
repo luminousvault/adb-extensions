@@ -87,7 +87,14 @@ ak <command> [options] [arguments...]
     - `-r` - 기존 앱 교체 (기본값)
     - `-t` - 테스트 APK 허용
     - `-d` - 버전 다운그레이드 허용
-- `pull [package|filename] [filename|package]` - 디바이스에서 APK 추출 (순서 무관)
+- `extract [package|filename] [filename|package]` - 디바이스에서 APK 추출 (순서 무관)
+
+#### 파일 관리
+
+- `pull [directory]` - 디바이스 최근 파일 가져오기 (MediaStore '최근 파일', 인터랙티브 다중 선택)
+  - 인자 없음: 현재 폴더에 저장
+  - 디렉터리 인자: 해당 폴더에 저장 (없으면 생성)
+  - 파일은 원본 이름으로 저장 (이름이 겹치면 ' (N)' 접미사 부여)
 
 #### 앱 정보
 
@@ -200,27 +207,39 @@ ak install /path/to/dir
 ak install /path/to/dir1 /path/to/dir2
 ```
 
-### APK 추출
+### 최근 파일 가져오기
 
-**포그라운드 앱 추출:**
+**최근 파일을 선택해서 현재 폴더로 가져오기:**
 ```bash
 ak pull
 ```
 
+**지정 폴더로 가져오기 (없으면 생성):**
+```bash
+ak pull /path/to/folder
+```
+
+### APK 추출
+
+**포그라운드 앱 추출:**
+```bash
+ak extract
+```
+
 **포그라운드 앱을 사용자 지정 파일명으로 추출:**
 ```bash
-ak pull myapp.apk
+ak extract myapp.apk
 ```
 
 **특정 패키지 추출:**
 ```bash
-ak pull com.example.app
+ak extract com.example.app
 ```
 
 **패키지와 파일명 지정 (순서 무관):**
 ```bash
-ak pull com.example.app my.apk
-ak pull my.apk com.example.app  # 위와 동일
+ak extract com.example.app my.apk
+ak extract my.apk com.example.app  # 위와 동일
 ```
 
 ### 앱 정보
@@ -286,7 +305,7 @@ ak devices
 
 **APK 추출 및 서명 확인:**
 ```bash
-ak pull com.example.app
+ak extract com.example.app
 ak signature com.example.app.apk
 ```
 

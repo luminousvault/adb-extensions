@@ -6,12 +6,13 @@ _ak() {
     'activities:Show activity stack'
     'clear:Clear app data and cache'
     'devices:Show connected devices'
+    'extract:Extract APK file from device'
     'info:Show package information'
     'install:Install APK files'
     'kill:Force-stop package'
     'launch:Launch package'
     'permissions:List package permissions'
-    'pull:Pull APK file from device'
+    'pull:Pull recent files from device'
     'signature:Extract signature hash'
     'uninstall:Uninstall package'
   )
@@ -40,6 +41,12 @@ _ak() {
           ;;
         devices)
           _arguments '(- *)'{-h,--help}'[Show help for this command]'
+          ;;
+        extract)
+          _arguments \
+            '(- *)'{-h,--help}'[Show help for this command]' \
+            '1:package name or file name:_message "package name or save file name"' \
+            '2:save file name or package name:_files'
           ;;
         info)
           _arguments \
@@ -78,8 +85,7 @@ _ak() {
         pull)
           _arguments \
             '(- *)'{-h,--help}'[Show help for this command]' \
-            '1:package name or file name:_message "package name or save file name"' \
-            '2:save file name or package name:_files'
+            '1:destination directory:_files -/'
           ;;
         signature)
           _arguments \

@@ -87,7 +87,14 @@ ak <command> [options] [arguments...]
     - `-r` - Replace existing app (default)
     - `-t` - Allow test APKs
     - `-d` - Allow version downgrade
-- `pull [package|filename] [filename|package]` - Extract APK from device (order flexible)
+- `extract [package|filename] [filename|package]` - Extract APK from device (order flexible)
+
+#### File Management
+
+- `pull [directory]` - Pull recent device files (MediaStore 'Recents', interactive multi-select)
+  - No argument: pull into the current directory
+  - Directory argument: pull into it (created if needed)
+  - Files are saved with their original names (duplicates get a ' (N)' suffix)
 
 #### App Information
 
@@ -200,27 +207,39 @@ ak install /path/to/dir
 ak install /path/to/dir1 /path/to/dir2
 ```
 
-### APK Extraction
+### Pulling Recent Files
 
-**Extract foreground app:**
+**Pick recent device files and pull into the current directory:**
 ```bash
 ak pull
 ```
 
+**Pull into a directory (created if it doesn't exist):**
+```bash
+ak pull /path/to/folder
+```
+
+### APK Extraction
+
+**Extract foreground app:**
+```bash
+ak extract
+```
+
 **Extract foreground app with custom filename:**
 ```bash
-ak pull myapp.apk
+ak extract myapp.apk
 ```
 
 **Extract specific package:**
 ```bash
-ak pull com.example.app
+ak extract com.example.app
 ```
 
 **Extract with package and filename (order flexible):**
 ```bash
-ak pull com.example.app my.apk
-ak pull my.apk com.example.app  # Same as above
+ak extract com.example.app my.apk
+ak extract my.apk com.example.app  # Same as above
 ```
 
 ### App Information
@@ -286,7 +305,7 @@ ak devices
 
 **Extract and check signature:**
 ```bash
-ak pull com.example.app
+ak extract com.example.app
 ak signature com.example.app.apk
 ```
 

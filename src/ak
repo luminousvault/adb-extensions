@@ -31,7 +31,8 @@ show_help() {
   echo
   echo -e "${BOLD}Commands:${NC}"
   echo -e "  ${BOLD}install${NC} [options] [apk_files...] Install APK files"
-  echo -e "  ${BOLD}pull${NC} [package] [filename]        Pull APK from device"
+  echo -e "  ${BOLD}pull${NC} [directory]                 Pull recent files from device"
+  echo -e "  ${BOLD}extract${NC} [package] [filename]     Extract APK from device"
   echo -e "  ${BOLD}info${NC} [package]                   Show app information"
   echo -e "  ${BOLD}permissions${NC} [package]            List app permissions"
   echo -e "  ${BOLD}uninstall${NC} [package]              Uninstall app"
@@ -80,7 +81,7 @@ main() {
       ;;
     
     # 다른 커맨드들 (동적 로드 또는 이미 로드됨)
-    install|pull|info|permissions|uninstall|clear|kill|launch|signature|activities|devices)
+    install|pull|extract|info|permissions|uninstall|clear|kill|launch|signature|activities|devices)
       # 개발 모드: load_command 함수 존재 시 동적 로드
       if declare -f load_command >/dev/null 2>&1; then
         if ! load_command "$command"; then

@@ -54,6 +54,7 @@ adb-extensions/
 │   │   └── commands/          # Command modules
 │   │       ├── install.sh     # Install command
 │   │       ├── pull.sh
+│   │       ├── extract.sh
 │   │       ├── info.sh
 │   │       ├── permissions.sh
 │   │       ├── uninstall.sh
@@ -97,20 +98,20 @@ git checkout -b feature/your-feature-name
 vim src/lib/commands/pull.sh
 
 # 3. Test directly (no build needed)
-./src/ak pull com.example
+./src/ak extract com.example
 
 # 4. Build to test the merged output
 ./build.sh
 
 # 5. Test build output
-./build/ak pull com.example
+./build/ak extract com.example
 
 # 6. Install for system-wide testing (optional)
 sudo ./build.sh --install
 
 # 7. Verify installation
 ak --version
-ak pull com.example
+ak extract com.example
 
 # 8. Commit your changes
 git add src/lib/commands/pull.sh
@@ -158,7 +159,7 @@ The project uses special markers for the build system:
 
 ```bash
 #@@HEADER_START
-# Command: pull
+# Command: extract
 # Description: Extract APK from device
 #@@HEADER_END
 ```
@@ -327,7 +328,7 @@ AK_DEBUG=1 ak <command> [options]
 # Examples
 AK_DEBUG=1 ak install ~/Downloads/app.apk
 AK_DEBUG=1 ak devices
-AK_DEBUG=1 ak pull com.example.app
+AK_DEBUG=1 ak extract com.example.app
 
 # Debug logs are written to build/debug.log
 cat build/debug.log
