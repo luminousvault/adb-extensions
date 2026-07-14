@@ -1024,8 +1024,10 @@ select_interactive() {
           if [ $selected_num -le $item_count ]; then
             if [ "$mode" = "multi" ]; then
               # 멀티 모드: 9개 이하일 때만 해당 항목만 선택하고 확정
-              if [ $item_count -le 9 ]; then
-                local selected_idx=$((selected_num - 1))
+              if [ $item_count -le 9 ] && [ $selected_num -le $filtered_count ]; then
+                # 화면 표시 위치 → 초기 원본 인덱스로 변환 (정렬/필터 반영)
+                local items_idx=${filtered_indices[$((selected_num - 1))]}
+                local selected_idx=${original_order[$items_idx]}
                 # 해당 항목만 선택 상태로 변경
                 for ((i=0; i<item_count; i++)); do
                   selection_status[$i]=0
@@ -1061,11 +1063,9 @@ select_interactive() {
     SELECTED_ITEMS=()
     SELECTED_INDICES=()
     for idx in "${selection_order[@]}"; do
-      # idx는 현재 items 배열의 인덱스
-      # original_order[idx]가 실제 원본 인덱스
-      local orig_idx="${original_order[$idx]}"
-      SELECTED_ITEMS+=("${items[$idx]}")
-      SELECTED_INDICES+=("$orig_idx")
+      # idx는 선택 시점에 이미 초기 원본 인덱스로 변환됨 (정렬 상태와 무관)
+      SELECTED_ITEMS+=("${initial_items[$idx]}")
+      SELECTED_INDICES+=("$idx")
     done
   else
     # 단일 선택: 단일 값으로 저장
