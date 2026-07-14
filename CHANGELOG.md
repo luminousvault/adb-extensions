@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-07-14
+
+### Added
+- New `pull` command: pull recent files from device
+  - Lists the 300 most recently modified files via MediaStore (like the Files app 'Recents' tab, no filesystem recursion)
+  - Duplicate file names among selected files are saved with a ' (N)' suffix instead of silently overwriting each other
+  - Non-existent destination directories require confirmation before being created
+  - Interactive multi-select with filename filter; each item shows its folder and size
+  - Destination handling: no argument pulls into the current directory; a directory argument (created if needed) pulls into it; files keep their original names
+
+### Changed
+- **Breaking:** APK extraction command renamed from `pull` to `extract` (same usage and behavior); `pull` is now the recent-file puller
+
+### Fixed
+- Interactive multi-select UI returned wrong indices after toggling name sort (S key), causing the wrong items to be selected (affected `install` and the new `pull`)
+- Number-key selection (1-9) in multi-select mode now maps through the current sort/filter order
+
 ## [1.1.6] - 2026-06-22
 
 ### Improved
