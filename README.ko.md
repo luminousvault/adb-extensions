@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.1.4-blue.svg)](https://github.com/luminousvault/adb-extensions)
+[![Version](https://img.shields.io/badge/version-1.1.4-blue.svg)](https://github.com/luminousvault/homebrew-adb-extensions)
 ![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20WSL-lightgrey.svg)
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=flat&logo=gnu-bash&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
@@ -38,8 +38,8 @@ brew install ak
 
 ```bash
 # 저장소 클론
-git clone https://github.com/luminousvault/adb-extensions.git
-cd adb-extensions
+git clone https://github.com/luminousvault/homebrew-adb-extensions.git
+cd homebrew-adb-extensions
 
 # 빌드 및 설치
 ./build.sh
@@ -348,8 +348,8 @@ Claude Hwang
 
 ```bash
 # Fork 및 클론
-git clone https://github.com/YOUR_USERNAME/adb-extensions.git
-cd adb-extensions
+git clone https://github.com/YOUR_USERNAME/homebrew-adb-extensions.git
+cd homebrew-adb-extensions
 
 # 변경사항 직접 테스트
 ./src/ak <command>
@@ -367,5 +367,5 @@ cd adb-extensions
 
 ## 지원
 
-- **이슈**: [GitHub Issues](https://github.com/luminousvault/adb-extensions/issues)
-- **토론**: [GitHub Discussions](https://github.com/luminousvault/adb-extensions/discussions)
+- **이슈**: [GitHub Issues](https://github.com/luminousvault/homebrew-adb-extensions/issues)
+- **토론**: [GitHub Discussions](https://github.com/luminousvault/homebrew-adb-extensions/discussions)

@@ -27,8 +27,8 @@ Before you begin development, ensure you have the following tools installed:
 1. Fork and clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/adb-extensions.git
-cd adb-extensions
+git clone https://github.com/YOUR_USERNAME/homebrew-adb-extensions.git
+cd homebrew-adb-extensions
 ```
 
 2. Test the development version directly:
@@ -419,7 +419,7 @@ Always test your changes with:
 
 ## Questions?
 
-- **Issues**: [GitHub Issues](https://github.com/luminousvault/adb-extensions/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/luminousvault/adb-extensions/discussions)
+- **Issues**: [GitHub Issues](https://github.com/luminousvault/homebrew-adb-extensions/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/luminousvault/homebrew-adb-extensions/discussions)
 
 Thank you for contributing to ADB Extensions Kit!

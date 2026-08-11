@@ -92,7 +92,7 @@ show_version() {
   echo -e "        ${YELLOW}:-=----:--------:---==-.${NC}        ${BOLD}${YELLOW}Language:${NC} Bash"
   echo -e "      ${YELLOW}:++=---==============---=+=.${NC}      ${BOLD}${YELLOW}Supported OS:${NC} macOS, Linux"
   echo -e "    ${RED}.+*+=+*%#++++++++++++++##+=+**-${NC}     ${BOLD}${YELLOW}Dependencies:${NC} adb, aapt, apksigner"
-  echo -e "   ${RED}.****+%@@%+++++++++++++*@@@#+**#+${NC}    ${BOLD}${YELLOW}Repository:${NC} https://github.com/luminousvault/adb-extensions"
+  echo -e "   ${RED}.****+%@@%+++++++++++++*@@@#+**#+${NC}    ${BOLD}${YELLOW}Repository:${NC} https://github.com/luminousvault/homebrew-adb-extensions"
   echo -e "   ${CYAN}*#*****#*+++++++++++++++*##*****#=${NC}   "
   echo -e "  ${BLUE}-%#*****++++++++++++++++++++****##%.${NC}  ${BOLD}${YELLOW}Purpose:${NC} ADB extensions kit - Essential ADB utilities"
   echo -e "                                        ${BOLD}${YELLOW}Features:${NC} APK install, Device management, App control"

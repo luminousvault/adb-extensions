@@ -551,7 +551,7 @@ main() {
     echo -e "  ${DIM}6.${NC} Commit changes"
     echo
   echo -e "${BOLD}For more information:${NC}"
-  echo -e "  Repository: ${CYAN}https://github.com/luminousvault/adb-extensions${NC}"
+  echo -e "  Repository: ${CYAN}https://github.com/luminousvault/homebrew-adb-extensions${NC}"
   echo -e "  Version: ${GREEN}${VERSION}${NC}"
   echo
     exit 0
