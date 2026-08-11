@@ -28,8 +28,11 @@ A unified CLI tool that simplifies Android Debug Bridge (ADB) operations includi
 
 ```bash
 brew tap luminousvault/adb-extensions
+brew trust luminousvault/adb-extensions
 brew install ak
 ```
+
+> **Note:** Since Homebrew 6.0, third-party taps must be explicitly trusted. If you see `Error: Refusing to load formula ... from untrusted tap`, run `brew trust luminousvault/adb-extensions` and try again.
 
 ### From Source
 

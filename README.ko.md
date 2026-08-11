@@ -28,8 +28,11 @@ APK 관리, 디바이스 제어, 앱 검사 등 Android Debug Bridge(ADB) 작업
 
 ```bash
 brew tap luminousvault/adb-extensions
+brew trust luminousvault/adb-extensions
 brew install ak
 ```
+
+> **참고:** Homebrew 6.0부터 서드파티 탭은 명시적으로 신뢰(trust)해야 합니다. `Error: Refusing to load formula ... from untrusted tap` 오류가 나오면 `brew trust luminousvault/adb-extensions`를 실행한 뒤 다시 설치하세요.
 
 ### 소스에서 설치
 
